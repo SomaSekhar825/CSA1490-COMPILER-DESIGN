@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <string.h>
+
+int tempVarCount = 0;
+
+void generateTAC(char* expression) {
+    char tempVar[3] = "t0";
+    int len = strlen(expression);
+
+    for (int i = 0; i < len; i++) {
+        if (expression[i] == '+' || expression[i] == '-' || 
+            expression[i] == '*' || expression[i] == '/') {
+
+            printf("%s = %c %c %c\n", tempVar, expression[i-1], expression[i], expression[i+1]);
+
+            expression[i-1] = tempVar[0];
+            expression[i] = expression[i+1] = ' ';
+            
+            tempVar[1]++;
+        }
+    }
+}
+
+int main() {
+    char expression[100];
+    printf("Enter an expression: ");
+    scanf("%s", expression);
+
+    generateTAC(expression);
+
+    return 0;
+}
